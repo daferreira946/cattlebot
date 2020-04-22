@@ -2,9 +2,9 @@
 
 use Codebird\Codebird;
 
-require 'vendor\autoload.php';
+require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$databasePath = __DIR__ . '/database.sqlite';
+$databasePath = __DIR__ . DIRECTORY_SEPARATOR . 'database.sqlite';
 $db = new PDO('sqlite:' . $databasePath);
 
 //Configurando COdeBird
@@ -36,7 +36,7 @@ foreach ($mentions as $index => $mention) {
 }
 
 //Arquivo de vídeo
-$file = __DIR__ . '/gado.mp4';
+$file = __DIR__ . DIRECTORY_SEPARATOR . 'gado.mp4';
 $sizeBytes = filesize($file);
 $fp = fopen($file, 'r');
 
