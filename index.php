@@ -35,10 +35,6 @@ foreach ($mentions as $index => $mention) {
     }
 }
 
-echo "<pre>";
-var_dump($tweets);
-echo "</pre>";
-
 //Arquivo de vídeo
 $file = __DIR__ . '/gado.mp4';
 $sizeBytes = filesize($file);
