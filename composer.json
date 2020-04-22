@@ -1,0 +1,5 @@
+{
+    "require": {
+        "vendor/jublonet/codebird-php": "^3.1"
+    }
+}
