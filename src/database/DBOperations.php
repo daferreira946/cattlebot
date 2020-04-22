@@ -6,18 +6,18 @@ use PDO;
 
 class DBOperations
 {
-    private string $dbPath;
-    private PDO $db;
-    private string $database;
+    private $dbPath;
+    private $db;
+    private $database;
 
-    public function __construct(string $database, string $dbPath)
+    public function __construct($database, $dbPath)
     {
         $this->database = $database;
         $this->dbPath = $dbPath;
         $this->connect();
     }
 
-    private function connect(): void
+    private function connect()
     {
         $databaseConnectionString = $this->database . ':' . $this->dbPath;
         $this->db = new PDO($databaseConnectionString);
@@ -33,7 +33,7 @@ class DBOperations
         ')->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function setLastId(string $lastTweetId)
+    public function setLastId($lastTweetId)
     {
         $stmt = $this->db->prepare('INSERT INTO last_tweet (id) VALUES (:tweetId);');
         $stmt->execute([

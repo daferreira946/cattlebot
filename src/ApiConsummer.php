@@ -7,14 +7,14 @@ use Codebird\Codebird;
 
 class ApiConsummer
 {
-    private string $apiKey;
-    private string $apiSecretKey;
-    private string $accessToken;
-    private string $accessSecretToken;
-    private Codebird $cb;
-    private string $mediaId;
+    private $apiKey;
+    private $apiSecretKey;
+    private $accessToken;
+    private $accessSecretToken;
+    private $cb;
+    private $mediaId;
 
-    public function __construct(string $apiKey, string $apiSecretKey, string $accessToken, string $accessSecretToken)
+    public function __construct($apiKey, $apiSecretKey, $accessToken, $accessSecretToken)
     {
         $this->apiKey = $apiKey;
         $this->apiSecretKey = $apiSecretKey;
@@ -31,13 +31,13 @@ class ApiConsummer
         $this->cb->setToken($this->accessToken, $this->accessSecretToken);
     }
 
-    public function getMentions(DBOperations $db): array
+    public function getMentions($db)
     {
         $lastId = $db->getLastId();
         return $this->cb->statuses_mentionsTimeline($lastId ? 'since_id=' . $lastId['id'] : '');
     }
 
-    public function getTweets(array $mentions): array
+    public function getTweets($mentions)
     {
         $tweets = [];
         foreach ($mentions as $index => $mention) {
@@ -52,7 +52,7 @@ class ApiConsummer
         return $tweets;
     }
 
-    public function prepareMedia(string $filePath, string $filetype)
+    public function prepareMedia($filePath, $filetype)
     {
         $sizeBytes = filesize($filePath);
         $fp = fopen($filePath, 'r');
@@ -93,7 +93,7 @@ class ApiConsummer
         }
     }
 
-    public function reply(array $tweets, string $frase)
+    public function reply($tweets, $frase)
     {
         foreach ($tweets as $index => $tweet) {
             $reply = $this->cb->statuses_update([
