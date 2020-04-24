@@ -10,8 +10,9 @@ GadoBot
 Projeto desenvolvido para brincar com a API do twitter, com o seguinte funcionamento: Quando alguém marca a conta, ela responde com uma legenda aleatória pré-definida e com um vídeo de um personagem de jogo.
 
 <br/>
-
-<img align="center" src="gado.gif" alt="Alistar vaquinha tocando sino"/>
+<p align="center">
+  <img src="gado.gif" alt="Alistar vaquinha tocando sino"/>
+</p>
 
 ## Instalação
 ### Composer
