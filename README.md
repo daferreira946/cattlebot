@@ -21,7 +21,7 @@ Abrir um terminal na pasta do projeto e digitar essa linha de código:
 ```
 ### Keys de acesso
 Criar na pasta um arqui com nome: "keys.json" e nele colocar as keys no formato abaixo:
-```
+```JSON
 {
     "API key":"sua_key",
     "API secret key":"sua_secret_key",
