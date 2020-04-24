@@ -40,7 +40,7 @@ $frases[] = 'MUUUUUUUUUUUU, O CURRAL TÁ ABERTO E OS GADOS CHEGANDO';
 $frases[] = 'MUUUUU, O REBANHO CHEGOU';
 
 //pegando frase aleatória
-$frase = $frases[mt_rand(0, count($frases))];
+$frase = $frases[mt_rand(0, count($frases)-1)];
 
 //respondendo
 $cb->reply($tweets, $frase);
