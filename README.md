@@ -3,7 +3,7 @@
 GadoBot
 </h1>
 
-<h3 align="center">Se divirda utilizando esse bot inofensivo no twitter</h3>
+<h3 align="center">Se divirta utilizando esse bot inofensivo no twitter</h3>
 
 <br/>
 
