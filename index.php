@@ -16,16 +16,25 @@ $db = new DBOperations('sqlite', $dbPath);
 $jsonPath = __DIR__ . DIRECTORY_SEPARATOR . 'keys.json';
 $json = file_get_contents('keys.json');
 $keys = json_decode($json,true);
-$cb = new ApiConsummer($keys['API key'], $keys['API secret key'], $keys['Access token'], $keys['Access token secret']);
+$cb = new ApiConsummer($keys['API key'], $keys['API secret key'], $keys['Access token'], $keys['Access token secret'], 'AlistarGadoBot');
 
 //Pegando as menções
 $mentions = $cb->getMentions($db);
 
+echo "<pre>";
+echo var_dump($mentions);
+echo "</pre>";
+
 if (!isset($mentions[0])) {
     exit();
 }
+
 //pegando os tweets
 $tweets = $cb->getTweets($mentions);
+
+echo "<pre>";
+echo var_dump($tweets);
+echo "</pre>";
 
 //preparando mídia
 $filePath = __DIR__ . DIRECTORY_SEPARATOR . 'gado.mp4';
@@ -46,6 +55,8 @@ $frase = $frases[mt_rand(0, count($frases)-1)];
 $cb->reply($tweets, $frase);
 
 //persistindo última resposta
-$lastTweetId = $tweets[0]['id'];
-$db->setLastId($lastTweetId);
+if (isset($tweets[0])) {
+    $lastTweetId = $tweets[0]['id'];
+    $db->setLastId($lastTweetId);
+}
 

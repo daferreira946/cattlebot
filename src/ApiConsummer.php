@@ -2,25 +2,26 @@
 
 namespace Catlebot\src;
 
-use Catlebot\src\database\DBOperations;
 use Codebird\Codebird;
 
 class ApiConsummer
 {
-    private $apiKey;
-    private $apiSecretKey;
-    private $accessToken;
-    private $accessSecretToken;
-    private $cb;
-    private $mediaId;
+    private string $apiKey;
+    private string $apiSecretKey;
+    private string $accessToken;
+    private string $accessSecretToken;
+    private ?Codebird $cb;
+    private string $mediaId;
+    private string $userName;
 
-    public function __construct($apiKey, $apiSecretKey, $accessToken, $accessSecretToken)
+    public function __construct(string $apiKey, string $apiSecretKey, string $accessToken, string $accessSecretToken, string $userName)
     {
         $this->apiKey = $apiKey;
         $this->apiSecretKey = $apiSecretKey;
         $this->accessToken = $accessToken;
         $this->accessSecretToken = $accessSecretToken;
         $this->initializeCB();
+        $this->userName = '@' . $userName;
     }
 
     private function initializeCB()
@@ -41,7 +42,7 @@ class ApiConsummer
     {
         $tweets = [];
         foreach ($mentions as $index => $mention) {
-            if (isset($mention['id'])) {
+            if (isset($mention['id']) && $mention['in_reply_to_status_id'] === null) {
                 $tweets[] = [
                     'id' => $mention['id'],
                     'user_screen-name' => $mention['user']['screen_name'],
@@ -96,7 +97,7 @@ class ApiConsummer
     public function reply($tweets, $frase)
     {
         foreach ($tweets as $index => $tweet) {
-            $reply = $this->cb->statuses_update([
+            $this->cb->statuses_update([
                 'status'    => '@' . $tweet['user_screen-name'] . ' ' . $frase,
                 'in_reply_to_status_id' => $tweet['id'],
                 'media_ids' => $this->mediaId
